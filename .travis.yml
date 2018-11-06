@@ -3,5 +3,8 @@ language: python
 install:
         - pip install -r requirements.txt
 
+script:
+        -python3 -m unittest
+
 after_success:
         - coveralls
