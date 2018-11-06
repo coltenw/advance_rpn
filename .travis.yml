@@ -7,7 +7,4 @@ install:
         - pip install -r requirements.txt
 
 script:
-        -echo "Script\n"
-
-after_success:
-        - coverall
+        -coveralls
