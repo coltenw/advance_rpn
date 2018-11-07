@@ -9,5 +9,6 @@ script:
     - make
 
 after_success:
+    - coverage run --source=unittest test_rpn.py test
     - coveralls
 
