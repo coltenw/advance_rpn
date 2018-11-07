@@ -3,10 +3,9 @@ python:
     - "2.7"
 
 install:
-    - pip install tox-travis coveralls
+    - pip install -r requirements.txt
 
-script:
-    - tox   
+script:   
     - make
 
 after_success:
