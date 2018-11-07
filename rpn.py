@@ -1,5 +1,22 @@
 #!/usr/bin/env python3
 
+import readline
+from pygments.lexers import Python3Lexer
+from prompt_toolkit.shortcuts import prompt
+from prompt_toolkit.lexers import PygmentsLexer
+from pygments.styles import get_style_by_name
+from prompt_toolkit.styles.pygments import style_from_pygments_cls
+from pygments.token import Token
+from pygments.style import Style
+from pygments import highlight
+from pygments.formatters import Terminal256Formatter
+
+class MyStyle(Style):
+    styles = {
+        Token.Number: '#ansiblue',
+        Token.Operator: '#ansiyellow'
+    }
+
 def calculate(arg):
     stack = []
 
@@ -27,8 +44,10 @@ def calculate(arg):
 def main():
     while True:
         try:
-            result = calculate(input('rpn calc> '))
-            print(result)
+            style = style_from_pygments_cls(get_style_by_name('monokai'))
+            result = calculate(prompt('rpn calc> ', lexer=PygmentsLexer(Python3Lexer), style=style, include_default_pygments_style=False))
+            out = highlight(str(result), Python3Lexer(), Terminal256Formatter(style=get_style_by_name('monokai')))
+            print(out)
         except ValueError:
             pass
 
